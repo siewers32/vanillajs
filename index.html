@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanilla Javascript</title>
+    <style>
+        #navlist {
+            background-color: yellow;
+            list-style-type: none;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        #navlist li {}
+
+        .active {
+            background-color: lightblue;
+        }
+
+        body {
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+
+<body onload="include('content', 'page1.html');">
+    <jjs-p>Hallo</jjs-p>
+    <jjs-p2></jjs-p2>
+    <my-counter onclick="countme(this)">1</my-counter>
+    <my-counter onclick="countme(this)">100</my-counter>
+    <next-counter>3</next-counter>
+    <next-counter>7</next-counter>
+    <click-button>
+        <template shadowrootmode=open>
+            <button onclick="this.getRootNode().host.clicked()">Click me</button>
+        </template>
+    </click-button>
+    <script>
+        customElements.define("click-button", class extends HTMLElement {
+            clicked() {
+                console.log("Button Click!", this.nodeName)
+
+            }
+        });
+    </script>
+    <click-button>
+        <template shadowrootmode=open>
+            <a href="#" onclick="this.getRootNode().host.clicked()">Click me</a>
+        </template>
+    </click-button>
+    <header>
+        <div id="navigation"></div>
+    </header>
+    <div id="content"></div>
+    <footer>
+        <div id="footer"></div>
+    </footer>
+    <script src="js/include.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="components/my-counter.js"></script>
+    <script defer>
+        include('navigation', 'nav.html')
+        include('footer', 'footer.html')
+        // addTemplates('components', ['next-counter']);
+    </script>
+    <script src="components/next-counter.js"></script>
+
+</body>
+</html>
